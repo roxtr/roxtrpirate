@@ -1,0 +1,766 @@
+<!DOCTYPE HTML >
+<html>
+	<head>
+		<meta charset="utf-8">
+    <title>YumTum, an awesome way to book tables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	 <link href="assets/css/bootstrap.css" rel="stylesheet">
+	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/yumtum-custom.css" rel="stylesheet">
+	<link href="assets/css/datepicker.css" rel="stylesheet">
+	<script src="assets/js/jquery.js"></script>
+	
+	<script>
+
+	$(document).ready(function (){var form = $('.dropdown-menu').find('*');
+form.click(function(e) {
+    e.stopPropagation();
+});
+$('#datepicker').datepicker({
+    format: 'dd-mm-yyyy'
+});
+$('#datepicker')
+    .datepicker()
+    .on('changeDate', function(ev){
+	$('<button/>',{'id':'remove','class':'btn btn-success','text':'Change'})
+	.appendTo('#mydiv');
+	$('#remove').live("click", function(){
+  $("#mydiv button.btn.btn-success").remove();
+  $("#remove").remove();
+  $('#datepicker').removeAttr('disabled');
+  });
+	var timeslot=['1200','1300','1400','2000','2100','2200'];
+	for (i=0; i<timeslot.length; i++){
+		
+        $('<button/>',{'class':'btn btn-success', 'text':""+timeslot[i]})
+		.appendTo('#mydiv');
+		
+		}
+		
+        $('#datepicker').datepicker('hide');
+		$('#datepicker').attr('disabled', 'disabled');
+    });
+
+				$.getJSON("restroname.js",function(data)
+				{
+					var myresult;
+            for (i = 0; i < data["results"].length; i++) {
+				//console.log("" +data ["results"].length);
+			
+				var myresult = data["results"][i]["result"];
+				//console.log(""+myresult)
+				
+			}
+							for (key in myresult)	{
+								console.log("" +data["results"][0]["result"][key])
+							//var i=0;
+							//console.log("" +data["results"][i]["result"][key])				
+					/*$('#list').append('<li>'+data["results"][0]["result"][key]+'</li>');
+					$('#list1').append('<li>'+data["results"][1]["result"][key]+'</li>');
+					$('#list2').append('<li>'+data["results"][2]["result"][key]+'</li>');
+					$('#list3').append('<li>'+data["results"][3]["result"][key]+'</li>');
+					$('#list4').append('<li>'+data["results"][4]["result"][key]+'</li>');*/
+					
+					$("#info").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][0]["result"][key]+"</p>");
+					$("#info1").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][1]["result"][key]+"</p>");
+					$("#info2").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][2]["result"][key]+"</p>");
+					$("#info3").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][3]["result"][key]+"</p>");
+					$("#info4").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][4]["result"][key]+"</p>");
+						}
+					 //var mydata = data;
+								var i=0;
+								var j=1;
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";				
+								$(div_data).prependTo("#restroname");
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+	                            //$("#address").append('<strong>'+data["results"][0]["result"].address+'</strong>');
+								//$("#address1").append('<strong>'+data["results"][1]["result"].address+'</strong>');
+								//$("#address2").append('<strong>'+data["results"][2]["result"].address+'</strong>');
+								//$("#address3").append('<strong>'+data["results"][3]["result"].address+'</strong>');
+								//$("#address4").append('<strong>'+data["results"][4]["result"].address+'</strong>');
+								
+								$("#map").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][0]["result"].latitude+","+data["results"][0]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][0]["result"].latitude+","+data["results"][0]["result"].longitude+"&sensor=false'>");
+								$("#map1").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][1]["result"].latitude+","+data["results"][1]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][1]["result"].latitude+","+data["results"][1]["result"].longitude+"&sensor=false'>");
+								$("#map2").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][2]["result"].latitude+","+data["results"][2]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][2]["result"].latitude+","+data["results"][2]["result"].longitude+"&sensor=false'>");
+								$("#map3").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][3]["result"].latitude+","+data["results"][3]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][3]["result"].latitude+","+data["results"][3]["result"].longitude+"&sensor=false'>");
+								$("#map4").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][4]["result"].latitude+","+data["results"][4]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][4]["result"].latitude+","+data["results"][4]["result"].longitude+"&sensor=false'>");
+}
+);
+});
+
+	</script>
+    
+	</head>
+	<body style="background-color:#C9C299">
+		
+		<!--Top Bar -->
+<div id="navbar-example" class="navbar navbar-static">
+            <div class="navbar-inner">
+              <div class="container">
+                <img src="img/logo.png" style="max-width: 11%;" alt="">
+               
+                <ul class="nav pull-right">
+                  <li id="menu" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>Login</strong><b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="height:165px; min-width:360px; max-width:360px;">
+                    <form class="form-vertical"style ="margin: 0px; 0px; 0px; 180px;" >
+					<input type="text" class="input-xlarge" placeholder="Email" style="margin-left:8px;">
+					<input type="password" class="input-xlarge" placeholder="Password" style="margin-left:8px;">
+				
+</form>
+<button type="submit" class="btn btn-primary" style="margin-left:12px;">Sign In</button>
+             <li class="divider"></li>
+      <button type="submit" class="btn btn-large" >Sign In with Facebook</button>
+	  <button type="submit" class="btn btn-large" >Sign In with Twitter</button>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>	
+		  <div class="page-header">
+	  <form class="form-search ">
+        <input type="text" class="input-medium search-query"  placeholder="Search by restaurants, cuisine ,Area " data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+		<button class="btn  btn-primary" >Search</button>
+		
+		</form>
+		</div>	
+		
+		  <!-- End of TopBar -->
+		   <!--Beginning of the main body container-->
+		 <div class="container-fluid">
+		 	
+  <div class="row-fluid">
+    <div class="span3" >
+    	
+      <!--Sidebar content, this is where we will be showing the filters-->
+	  <div class="control-group">
+            <label class="control-label" for="select01">Select list</label>
+            <div class="controls">
+              <select id="select01" placeholder="Where">
+              	<option>Where</option>
+                <option>Indiranagar</option>
+                <option>Jayanagar</option>
+                <option>Koramangala</option>
+                <option>Banashankari</option>
+                <option>M G Road</option>
+				<option>Residency Road</option>
+				<option>Shivaji Nagar</option>
+				
+              </select>
+            </div>
+			<div class="controls">
+              <select id="select02" placeholder="What time">
+              	<option>What time</option>
+                <option>1200 hrs</option>
+                <option>1230 hrs</option>
+                <option>1300 hrs</option>
+                <option>1330 hrs</option>
+                <option>1400</option>
+				<option>1900</option>
+				<option>1930</option>
+				<option>2000</option>
+				<option>2030</option>
+				<option>2100</option>
+				<option>2130</option>
+				<option>2200</option>
+              </select>
+            </div>
+			<div class="controls">
+              <select id="select02" placeholder="How Many">
+              	<option>How Many</option>
+                <option>2</option>
+                <option>4</option>
+                <option>6</option>
+                <option>8</option>
+                <option>More than 10</option>
+				
+              </select>
+            </div>
+			<div class="control-group">
+            <label class="control-label" for="multiSelect">Multicon-select</label>
+            <div class="controls">
+              <select multiple="multiple" id="multiSelect">
+                <option>Wifi</option>
+                <option>Valet Parking</option>
+                <option>Pure Veg</option>
+                <option>Credit Card</option>
+                <option>Kid Freindly</option>
+              </select>
+            </div>
+          </div>
+          </div>
+    </div><!--End of the sidebar content-->
+    <div class="span7">
+      <!--Body content, this is where we will be displaying the search content-->
+	  	  <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" >
+                  <img src="img/pl.gif" alt="">
+                </a>
+              </div>
+			  <div class="row">
+				
+				<div id ="restroname" class="span4 offset2" style="margin-top: -100px; margin-left:160px;">
+				<!--h1 ><a href ="#">Restaurant1</a></h1-->
+			    <div class="cuisineimg">
+				<p class="cuisinehdg">Cuisine</p>
+				<p class="cuisineval">European</p>
+				</div>
+				<div class="markerimg">
+				<p class="markerhdg">Locality</p>
+				<p class="markerval">M G Road</p>
+				</div>
+				<div class="timingimg">
+				<p class="timinghdg">Timings</p>
+				<p class="timingval">1100hrs-<span>2300hrs</span></p>
+				</div>
+				
+				</div>
+                
+				<div class="span8 offset5" >
+				
+				<button class="btn btn-large btn-primary" style="margin-top:-110px; margin-left:70px;">BookMyTable</button>
+				
+				</div>
+				<p class="address" id="address"></p>
+              </div>
+              <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+                <div class="accordion-inner">
+                 <ul id="tab" class="nav nav-tabs">
+            <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+            <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
+            <li><a href="#booktable" data-toggle="tab">BookMyTable</a></li>
+          </ul>
+		  
+                </div>
+				<div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade  " id="info">
+
+            <!--ul style="list-style:none;" id ="list">
+			
+			</ul-->
+			<div class="map" id="map">
+			
+			</div>
+            </div>
+			<!--Reviews-->
+            <div class="tab-pane fade" id="reviews">
+			<ul style="list-style:none;">
+			<li class="well">
+              <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>2 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User1</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>20 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User2</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  </ul>
+            </div>
+			<!--Booktableform-->
+            <div class="tab-pane fade" id="booktable">
+              <div class ="mydiv" id="mydiv">
+              	<form class="form-inline">
+              		<label class="cuisinehdg">For</label>
+              		<select placeholder="How Many">
+              			<option>2</option>
+						<option>4</option>
+						<option>6</option>
+						<option>8</option>
+              		</select>
+					<input type="text" value="02-16-2012" id="datepicker"> 
+              	</form>
+            </div>
+          
+  
+          </div>
+              </div>
+            </div>
+			<!--Second Result-->
+          <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                  <img src="img/pl.gif" alt="">
+                </a>
+              </div>
+			  <div class="row">
+				
+				<div id="restroname1"class="span4 offset2" style="margin-top: -100px; margin-left:160px;">
+				<!--h1 ><a href ="#">Restaurant2</a></h1-->
+				<div class="cuisineimg">
+				<p class="cuisinehdg">Cuisine</p>
+				<p class="cuisineval">European</p>
+				</div>
+				<div class="markerimg">
+				<p class="markerhdg">Locality</p>
+				<p class="markerval">M G Road</p>
+				</div>
+				<div class="timingimg">
+				<p class="timinghdg">Locality</p>
+				<p class="timingval">M G Road</p>
+				</div>
+				
+				</div>
+                <p class="address" id ="address1"></p>
+				<div class="span8 offset5" >
+				
+				<button class="btn btn-large btn-primary" style="margin-top:-110px; margin-left:70px;">BookMyTable</button>
+				
+				</div>
+				
+              </div>
+              <div id="collapseTwo" class="accordion-body collapse" style="height: 0px; ">
+                <div class="accordion-inner">
+                 <ul id="tab" class="nav nav-tabs">
+            <li class="active"><a href="#info1" data-toggle="tab">Info</a></li>
+            <li><a href="#reviews1" data-toggle="tab">Reviews</a></li>
+            <li><a href="#booktable1" data-toggle="tab">BookMyTable</a></li>
+          </ul>
+		  
+                </div>
+				<div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade  " id="info1">
+
+            <ul style="list-style:none;" id ="list1">
+			
+			</ul>
+			<div class="map" id ="map1">
+			
+			</div>
+            </div>
+			<!--Reviews-->
+            <div class="tab-pane fade" id="reviews1">
+			<ul style="list-style:none;">
+			<li class="well">
+              <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>2 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User1</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>20 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User2</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  </ul>
+            </div>
+			<!--Booktableform-->
+            <div class="tab-pane fade" id="booktable1">
+              <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+            </div>
+  
+          </div>
+              </div>
+            </div>
+			<!--Third Result-->
+          <div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+                  <img src="img/pl.gif" alt="">
+                </a>
+              </div>
+			  <div class="row">
+				
+				<div id ="restroname2"class="span4 offset2" style="margin-top: -100px; margin-left:160px;">
+				<!--h1 ><a href ="#">Restaurant3</a></h1-->
+					<div class="cuisineimg">
+						<p class="cuisinehdg">Cuisine</p>
+						<p class="cuisineval">European</p>
+				</div>
+					<div class="markerimg">
+						<p class="markerhdg">Locality</p>
+						<p class="markerval">M G Road</p>
+				</div>
+					<div class="timingimg">
+						<p class="timinghdg">Locality</p>
+						<p class="timingval">M G Road</p>
+				</div>
+				
+				</div>
+                <p class="address" id="address2"></p>
+				<div class="span8 offset5" >
+				
+				<button class="btn btn-large btn-primary" style="margin-top:-110px; margin-left:70px;">BookMyTable</button>
+				
+				</div>
+				
+              </div>
+              <div id="collapseThree" class="accordion-body collapse" style="height: 0px; ">
+                <div class="accordion-inner">
+                 <ul id="tab" class="nav nav-tabs">
+            <li class="active"><a href="#info2" data-toggle="tab">Info</a></li>
+            <li><a href="#reviews2" data-toggle="tab">Reviews</a></li>
+            <li><a href="#booktable2" data-toggle="tab">BookMyTable</a></li>
+          </ul>
+		  
+                </div>
+				<div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade  " id="info2">
+
+            <ul style="list-style:none;" id="list2">
+			
+			</ul>
+			<div class="map" id="map2">
+			
+			</div>
+            </div>
+			<!--Reviews-->
+            <div class="tab-pane fade" id="reviews2">
+			<ul style="list-style:none;">
+			<li class="well">
+              <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>2 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User1</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>20 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User2</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  </ul>
+            </div>
+			<!--Booktableform-->
+            <div class="tab-pane fade" id="booktable2">
+              <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+            </div>
+  
+          </div>
+              </div>
+            </div>
+			<!--Forth Result-->
+			<div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+                  <img src="img/pl.gif" alt="">
+                </a>
+              </div>
+			  <div class="row">
+				
+				<div id ="restroname3" class="span4 offset2" style="margin-top: -100px; margin-left:160px;">
+				<!--h1 ><a href ="#">Restaurant4</a></h1-->
+					<div class="cuisineimg">
+						<p class="cuisinehdg">Cuisine</p>
+						<p class="cuisineval">European</p>
+					</div>
+					<div class="markerimg">
+						<p class="markerhdg">Locality</p>
+						<p class="markerval">M G Road</p>
+				</div>
+					<div class="timingimg">
+						<p class="timinghdg">Locality</p>
+						<p class="timingval">M G Road</p>
+				</div>
+				
+				</div>
+                <p class="address" id ="address3"></p>
+                	
+                
+				<div class="span8 offset5" >
+				
+				<button class="btn btn-large btn-primary" style="margin-top:-110px; margin-left:70px;">BookMyTable</button>
+				
+				</div>
+				
+              </div>
+              <div id="collapseFour" class="accordion-body collapse" style="height: 0px; ">
+                <div class="accordion-inner">
+                 <ul id="tab" class="nav nav-tabs">
+            <li class="active"><a href="#info3" data-toggle="tab">Info</a></li>
+            <li><a href="#reviews3" data-toggle="tab">Reviews</a></li>
+            <li><a href="#booktable3" data-toggle="tab">BookMyTable</a></li>
+          </ul>
+		  
+                </div>
+				<div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade  " id="info3">
+
+            <ul style="list-style:none;" id ="list3">
+			
+			</ul>
+			<div class="map" id="map3">
+			
+			</div>
+            </div>
+			<!--Reviews-->
+            <div class="tab-pane fade" id="reviews3">
+			<ul style="list-style:none;">
+			<li class="well">
+              <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>2 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User1</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>20 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User2</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  </ul>
+            </div>
+			<!--Booktableform-->
+            <div class="tab-pane fade" id="booktable3">
+              <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+            </div>
+  
+          </div>
+              </div>
+            </div>
+			<!--Fifth Result-->
+			<div class="accordion-group">
+              <div class="accordion-heading">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+                  <img src="img/pl.gif" alt="">
+                </a>
+              </div>
+			  <div class="row">
+				
+				<div id ="restroname4" class="span4 offset2" style="margin-top: -100px; margin-left:160px;">
+				<!--h1 ><a href ="#">Restaurant5</a></h1-->
+					<div class="cuisineimg">
+						<p class="cuisinehdg">Cuisine</p>
+						<p class="cuisineval">European</p>
+					</div>
+					<div class="markerimg">
+						<p class="markerhdg">Locality</p>
+						<p class="markerval">M G Road</p>
+					</div>
+					<div class="timingimg">
+						<p class="timinghdg">Locality</p>
+						<p class="timingval">M G Road</p>
+					</div>
+					
+				
+				</div>
+                <p class="address" id="address4"></p>
+				<div class="span8 offset5" >
+				
+				<button class="btn btn-large btn-primary" style="margin-top:-110px; margin-left:70px;">BookMyTable</button>
+				
+				</div>
+				
+              </div>
+              <div id="collapseFive" class="accordion-body collapse" style="height: 0px; ">
+                <div class="accordion-inner">
+                 <ul id="tab" class="nav nav-tabs">
+            <li class="active"><a href="#info4" data-toggle="tab">Info</a></li>
+            <li><a href="#reviews4" data-toggle="tab">Reviews</a></li>
+            <li><a href="#booktable4" data-toggle="tab">BookMyTable</a></li>
+          </ul>
+		  
+                </div>
+				<div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade  " id="info4">
+
+            <ul style="list-style:none;" id="list4">
+			
+			</ul>
+			<div class="map" id="map4">
+			
+			</div>
+            </div>
+			<!--Reviews-->
+            <div class="tab-pane fade" id="reviews4">
+			<ul style="list-style:none;">
+			<li class="well">
+              <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>2 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User1</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  <img src="img/pl1.gif" alt="">
+			  <div style="float:right; margin-right:-200px; margin-top:1px;">
+			  <img src="img/up-icon.png" style="max-width:10%;" alt="">
+			  
+			  <p><strong>20 people like this</strong></p>
+			 
+			  
+			  			  </div>
+			  			  <h4 style="display:inline; margin-top:-90px; "><a href ="#">User2</a></h4>
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  <li class="well">
+			  
+			  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+			  
+			  </li>
+			  </ul>
+            </div>
+			<!--Booktableform-->
+            <div class="tab-pane fade" id="booktable4">
+              <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+            </div>
+  
+          </div>
+              </div>
+            </div>
+			<!--Sixth Result-->
+			
+          </div>
+    </div>
+  </div><!--End of the row fluid-->
+</div><!--End of the conatiner fluid-->
+<div class="pagination offset8">
+        <ul>
+          <li class="disabled"><a href="«">«</a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="»">»</a></li>
+        </ul>
+      </div>
+	</body>
+	
+	 
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/application.js"></script>
+	<script src="assets/js/bootstrap-datepicker.js"></script>
+</html>

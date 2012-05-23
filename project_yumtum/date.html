@@ -1,0 +1,48 @@
+<!DOCTYPE HTML >
+<html>
+<head>
+<script src="assets/js/jquery.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<link rel="stylesheet" href="assets/css/bootstrap.css" >
+<link rel="stylesheet" href="assets/css/datepicker.css">
+<script>
+$(document).ready(function (){
+$("input").click(function(event) {
+        //alert(event.target.id);
+    });
+$("#"+datepicker)
+    .datepicker()
+    .on('changeDate', function(ev){
+	$('<button/>',{'id':'remove','class':'btn btn-success'})
+	.appendTo('body');
+	$('#remove').live("click", function(){
+  $("#mydiv button.btn.btn-success").remove();
+  $("#remove").remove();
+  });
+	var timeslot=['1200','1300','1400','2000','2100','2200'];
+	for (i=0; i<timeslot.length; i++){
+		
+        $('<button/>',{'class':'btn btn-success', 'text':""+timeslot[i]})
+		.appendTo('#mydiv');
+		
+		}
+		
+        $('#datepicker').datepicker('hide');
+    });
+//$('#remove').click(function(){
+
+//});
+});
+
+</script>
+</head>
+<body>
+
+			  <input type="text" class="large" value="16-02-2012" id="datepicker"> 
+			  <!--button class="btn btn-success" id="remove">Change Button</button-->
+          <div id="mydiv" >
+		  </div>
+		  <input type="text" class="large" value="16-02-2012" id="datepicker1"> 
+
+</body>
+</html>

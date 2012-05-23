@@ -1,0 +1,131 @@
+<!DOCTYPE HTML >
+<html>
+	<head>
+		<meta charset="utf-8">
+    <title>YumTum, an awesome way to book tables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	 <link href="assets/css/bootstrap.css" rel="stylesheet">
+	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/yumtum-custom.css" rel="stylesheet">
+	<link href="assets/css/datepicker.css" rel="stylesheet">
+	<script src="assets/js/jquery.js"></script>
+	
+	<script>
+
+	$(document).ready(function (){var form = $('.dropdown-menu').find('*');
+form.click(function(e) {
+    e.stopPropagation();
+});
+$('#datepicker').datepicker({
+    format: 'dd-mm-yyyy'
+});
+$('#datepicker')
+    .datepicker()
+    .on('changeDate', function(ev){
+	$('<button/>',{'id':'remove','class':'btn btn-success','text':'Change'})
+	.appendTo('#mydiv');
+	$('#remove').live("click", function(){
+  $("#mydiv button.btn.btn-success").remove();
+  $("#remove").remove();
+  $('#datepicker').removeAttr('disabled');
+  });
+	var timeslot=['1200','1300','1400','2000','2100','2200'];
+	for (i=0; i<timeslot.length; i++){
+		
+        $('<button/>',{'class':'btn btn-success', 'text':""+timeslot[i]})
+		.appendTo('#mydiv');
+		
+		}
+		
+        $('#datepicker').datepicker('hide');
+		$('#datepicker').attr('disabled', 'disabled');
+    });
+
+				$.getJSON("restroname.js",function(data)
+				{
+					var myresult;
+            for (i = 0; i < data["results"].length; i++) {
+				//console.log("" +data ["results"].length);
+			
+				var myresult = data["results"][i]["result"];
+				//console.log(""+myresult)
+				
+			}
+							for (key in myresult)	{
+								console.log("" +data["results"][0]["result"][key])
+							//var i=0;
+							//console.log("" +data["results"][i]["result"][key])				
+					/*$('#list').append('<li>'+data["results"][0]["result"][key]+'</li>');
+					$('#list1').append('<li>'+data["results"][1]["result"][key]+'</li>');
+					$('#list2').append('<li>'+data["results"][2]["result"][key]+'</li>');
+					$('#list3').append('<li>'+data["results"][3]["result"][key]+'</li>');
+					$('#list4').append('<li>'+data["results"][4]["result"][key]+'</li>');*/
+					
+					$("#info").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][0]["result"][key]+"</p>");
+					$("#info1").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][1]["result"][key]+"</p>");
+					$("#info2").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][2]["result"][key]+"</p>");
+					$("#info3").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][3]["result"][key]+"</p>");
+					$("#info4").append("<label class='infolabel'>" + key+"</label>"+"<p class='infovalue'>"+data["results"][4]["result"][key]+"</p>");
+						}
+					 //var mydata = data;
+								var i=0;
+								var j=1;
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";				
+								$(div_data).prependTo("#restroname");
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
+								$(div_data).prependTo("#restroname" + (j++));
+								
+	                            //$("#address").append('<strong>'+data["results"][0]["result"].address+'</strong>');
+								//$("#address1").append('<strong>'+data["results"][1]["result"].address+'</strong>');
+								//$("#address2").append('<strong>'+data["results"][2]["result"].address+'</strong>');
+								//$("#address3").append('<strong>'+data["results"][3]["result"].address+'</strong>');
+								//$("#address4").append('<strong>'+data["results"][4]["result"].address+'</strong>');
+								
+								$("#map").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][0]["result"].latitude+","+data["results"][0]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][0]["result"].latitude+","+data["results"][0]["result"].longitude+"&sensor=false'>");
+								$("#map1").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][1]["result"].latitude+","+data["results"][1]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][1]["result"].latitude+","+data["results"][1]["result"].longitude+"&sensor=false'>");
+								$("#map2").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][2]["result"].latitude+","+data["results"][2]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][2]["result"].latitude+","+data["results"][2]["result"].longitude+"&sensor=false'>");
+								$("#map3").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][3]["result"].latitude+","+data["results"][3]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][3]["result"].latitude+","+data["results"][3]["result"].longitude+"&sensor=false'>");
+								$("#map4").append("<img src='http://maps.googleapis.com/maps/api/staticmap?center="+data["results"][4]["result"].latitude+","+data["results"][4]["result"].longitude+"&zoom=11&size=200x200&markers=color:blue%7Clabel:S%7C"+data["results"][4]["result"].latitude+","+data["results"][4]["result"].longitude+"&sensor=false'>");
+}
+);
+});
+
+	</script>
+    
+	</head>
+	<body>
+
+	</body>
+	
+	 
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/application.js"></script>
+	<script src="assets/js/bootstrap-datepicker.js"></script>
+</html>

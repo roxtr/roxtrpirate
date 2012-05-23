@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- http://dhtmlexamples.com/2011/07/08/enabling-and-disabling-buttons-using-jquery/ -->
+<html>
+<head>
+    <title>Enabling and disabling buttons using jQuery</title>
+    <style type="text/css">
+        #clearBtn {
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+ 
+   <ul>
+  <li>list item 1</li>
+  <li>list item 2</li>
+  <li>list item 3</li>
+</ul>
+ 
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+		$('ul').add('<p id="new">new paragraph</p>')
+  .css('background-color', 'red');
+            
+        }); // ready()
+    </script>
+ 
+</body>
+</html>

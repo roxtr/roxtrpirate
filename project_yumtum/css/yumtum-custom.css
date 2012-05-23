@@ -1,0 +1,311 @@
+.tagcloud{
+  margin-left: 20px;
+  display:none;
+
+}
+.logindropdown{
+  width:220px;
+  height:220px;
+}
+.address{
+  margin-top: -30px;
+  margin-left:160px;
+  color:#005580
+}
+
+.map{
+  float:right;
+  margin-top:50px;
+  margin-right:10px;
+}
+
+.login-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 260px;
+  max-width: 220px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  background-color: white;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  
+}
+
+div.side-by-side { width: 100%; margin-bottom: 1em; }
+    div.side-by-side > div { float: left; width: 50%; }
+    div.side-by-side > div > em { margin-bottom: 10px; display: block; }
+
+.sidebar{
+padding-left:-60px;
+padding-top:20px;
+
+}
+.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: 'â˜… ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+.my-cuisine{
+     float:left;
+	 display:inline;
+
+}
+
+.infolabel{
+	color:#155B80;
+	font-weight:bold;	
+	float:left;	
+	margin-left:5px;
+}
+
+.infovalue{
+	margin-left:60px;
+	font-weight:800;	
+}
+
+.cuisineimg{
+	background-image:url("../img/cuisine1.png");
+	background-repeat: no-repeat;
+	margin-top:-48px;
+	height:40px;
+	width:20%;
+	margin-left:150px;
+	
+}
+
+.cuisinehdg{
+	font-size:15px;
+	font-weight:bold;
+	color:#155B80;
+	margin-left:35px;
+	margin-top:-20%;
+	
+}
+
+.cuisineval{
+	font-weight:bold;
+	font-variant:small-caps;
+	margin-left:36px;
+	margin-top:-12%;
+	padding-top:6%;	
+}
+.markerimg{
+	background-image:url('../img/marker.png');
+	background-repeat: no-repeat;
+	margin-top:-40px;
+	width:18%;
+	height:40px;
+	margin-left:254px;
+}
+
+.markerhdg{
+	font-size:15px; 
+	font-weight:bold;
+	color:#155B80;
+	margin-left:24%;
+	margin-top:-20%;
+	
+}
+
+.markerval{
+	font-weight:bold;
+	font-variant:small-caps;
+	margin-left:25%;
+	margin-top:-13px;
+	padding-top:6%;
+}
+
+.timingimg{
+	
+	background-image:url('../img/clock1.png');
+	background-repeat: no-repeat;
+	margin-top:-40px;
+	width:20%;
+	height:40px;
+	margin-left:364px;
+}
+.timinghdg{
+	font-size:15px;
+	font-weight:bold; 
+	color:#155B80 ;
+	margin-left:32%;
+	margin-top:-20%;
+}
+
+.timingval{
+	font-weight:bold;
+	font-variant:small-caps;
+	margin-left:32%;
+	margin-top:-13px;
+	padding-top:6%;
+}
+.mydiv{
+	margin-left:50px;
+	display:inline;
+	height:200px;
+	width:200px;
+	margin-top:10px;
+}
+
+.restrohdg{
+margin-top:-16%; 
+margin-left:-10%;
+
+}
+.tblbtn{
+margin-top:-16%;
+margin-left:-2%
+}
+
+.name{
+margin-left:40px;
+margin-top:13px;	
+}
+
+.telno{
+margin-left:-220px;
+margin-top:80px;
+}
+
+.bkngdetails{
+margin-left:-14px;
+height:100px;
+margin-top:-10px;
+}
+
+button.mydiv{
+	margin-left:460px;
+	margin-top:-303px;'
+}
+.tmargin10{
+	
+	margin-top:10px;
+}
+.divider-or{
+	
+	width:42px;
+	height:42px;
+	background:url("icons-sprite.png") no-repeat scroll -54px -39px transparent;
+	position:relative;
+	top:-107px;
+	right:-277px;
+	
+}
+.social-signin-message{
+	margin-top:-10px;
+	margin-right:20px;
+}
+.social-connect{
+	padding-left:323px;
+	
+	border-bottom:0;
+	border-top:0;
+	margin-top:-154px;
+	
+	
+}
+
+.unit{
+	float:left;
+}
+.fk-button-social{
+	cursor:pointer;
+	width:141px;
+	height:32px;
+	display:inline-block;
+	zoom:1
+}
+.fk-button-social.fb{
+	
+	background:url("icons-sprite.png") no-repeat scroll -1px -184px transparent
+}
+
+.tmargin25{
+	
+	margin-top:25px;
+}
+
+.fk-button-social.google{
+	
+	background:url("icons-sprite.png") no-repeat scroll -1px -213px transparent
+}
+
+div.mydiv > button{
+	
+	float:right;
+	margin-top:-155px;
+	margin-right:133px;
+}
+
+

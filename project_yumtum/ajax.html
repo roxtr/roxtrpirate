@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+ 	<script type="text/javascript" src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-tabs.js"></script>
+  	<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+  </head>
+  <body>
+    <h1>bootstrap-tabs load content through ajax example</h1>
+  
+  <ul class="tabs">
+  <li class="active"><a href="#home">Home</a></li>
+  <li><a href="#ajax">Ajax load content</a></li>
+</ul>
+
+
+<div class="pill-content">
+  <div class="active" id="home">home content</div>
+  <div id="ajax">...</div>
+</div>
+
+    <script type="text/javascript">
+  $(function () {
+    $('.tabs').tabs()
+  });
+  
+$('.tabs').bind('change', function (e) {
+  var nowtab = e.target // activated tab
+  var divid = $(nowtab).attr('href').substr(1);
+  if(divid == "ajax") {
+    $.getJSON('http://localhost:50/data.js').success(function(data){
+        	$("#"+divid).text(data.msg);
+    });
+  }
+  
+  
+});
+  
+</script>
+  
+  </body>
+</html>
