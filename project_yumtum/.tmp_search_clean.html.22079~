@@ -11,7 +11,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 	 <link href="assets/css/bootstrap.css" rel="stylesheet">
-	<!--link href="assets/css/bootstrap-responsive.css" rel="stylesheet"-->
+	<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="css/yumtum-custom.css" rel="stylesheet">
 	<link href="assets/css/datepicker.css" rel="stylesheet">
 	<script src="assets/js/jquery.js"></script>
@@ -27,35 +27,12 @@ form.click(function(e) {
 
 $('#loginclose').click(function(){
 	$("button").removeClass("btn btn-primary active").addClass("btn btn-primary");
-	if($('#loginform').hasClass('control-group error')){
-		$("#loginform").removeClass("control-group error").addClass("textbox");
-		
-	}
-	var x =$('#uid');
-	var y=$('#pswd');
-	if ((x.val()||y.val())!=0){
-		x.val('');
-		y.val('');
-		
-	}
-	
 });
 
 // Code to change the class of he clicked button
 
 $('#loginclosebtn').click(function(){
 	$("button").removeClass("btn btn-primary active").addClass("btn btn-primary");
-	if($('#loginform').hasClass('control-group error')){
-		$("#loginform").removeClass("control-group error").addClass("textbox");
-		
-	}
-	var x =$('#uid');
-	var y=$('#pswd');
-	if ((x.val()||y.val())!=0){
-		x.val('');
-		y.val('');
-		
-	}
 });
 $('#signupclose').click(function(){
 	$("button").removeClass("btn btn-primary active").addClass("btn btn-primary");
@@ -100,21 +77,19 @@ $('.accordion-toggle').click(function(e){
 
 		}); 
 		$('.restrohdg').delegate("a","click",function(e){
-			var x = (''+($(this).closest(".accordion-toggle").attr('href')));
+			var x = (''+($(this).closest(".accordion-group").children().children().attr('href')));
 		console.log(""+x);
 	$(""+x).collapse('show');
 	var y= ($(x).find('ul').attr('id'));
 	console.log(""+y);
 	var z= ('#'+y+' '+'li:eq(0) a');
 	$(z).tab('show');
-	var ele= $(this).closest(".accordion-toggle").attr('href');
+	var ele= $(this).attr("href");
 	$(""+ele).ScrollTo({
 		duration:2000,
 		easing:'linear'
 	});
 		});
-		
-		
 		
 	
 	//This initializes the date picker
@@ -122,7 +97,7 @@ $('.datepicker').datepicker({
     format: 'dd-mm-yyyy'
 });
 //Code to add the Change button
-	$(".datepicker").click(function(event){
+	$("input").click(function(event){
 	$("#"+event.target.id)
    	 .datepicker()
    	 .one('changeDate', function(ev){
@@ -168,8 +143,6 @@ $('.datepicker').datepicker({
 	});
 	   
     });
-	
-	
 		$('#remove').live("click", function(e){
 		 var dp=($(this).closest(".mydiv").find(".datepicker").attr('id'));
 	    
@@ -189,17 +162,6 @@ $('.datepicker').datepicker({
 	  btnval=undefined;
 
   });
-  
-  $('.accordion-toggle').hover(function(e){
-  	$('.accordion-toggle').tooltip({
-				
-				title:"Click to Expand",
-				trigger:"hover",
-				placement:'top',
-				
-			});
-			
-  });
   var btnval;
   $(".timeslot").delegate(".btn.btn-success", "click",function(e){
    btnval= ($(this).val());  
@@ -215,7 +177,7 @@ $('.datepicker').datepicker({
 	str = Number(str);
 	var exp ="restroname"+str;
 	//console.log(""+exp)
-	var rstrname=($("#"+exp).children().text());
+	var rstrname=($("#"+exp).children().children().text());
 	
  console.log("" +z);
     //alert(z);
@@ -243,17 +205,6 @@ $('.datepicker').datepicker({
 	  "keyboard"  : false,
       "show"      : true    // this parameter ensures the modal is shown 
     });
-	
-	//ajax to submit the booking form
-	xmlhttp = new XMLHttpRequest();
-   xmlhttp.open("GET","http://localhost:8001/getstring", true);
-   xmlhttp.onreadystatechange=function(){
-         if (xmlhttp.readyState==4 && xmlhttp.status==200){
-           string=xmlhttp.responseText;
-		   alert(""+string)
-         }
-   }
-   xmlhttp.send();
 	}
 	
 	});
@@ -265,27 +216,10 @@ $('.datepicker').datepicker({
 	});
 	
 	$('#login').click(function(e){
-		if ($("#uid").val()=="" || $("#pswd").val()=="") {
-			$("fieldset").removeClass("textbox").addClass("control-group error");
-		}
-		else {
-			$('#loginModal').modal('hide');
-			$('#loginbar').append('<ul class="nav pull-right" id="loginname"> <li id="fat-menu" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sripathi Pai<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="profile.html">My Profile</a></li><li><a href="#">My Bookings</a></li><li class="divider"></li><li id="logout"><a href="#" >Logout</a></li></ul></li></ul>')
-			$('#loginbtngrp').remove();
-		}    
-              });  
-			  
-	$('#logout').live("click",function(e){
-		$('<div class="pull-rght" style="padding-top:65px; float:right; clear:both;" id="loginbtngrp"><div class="btn-group" data-toggle="buttons-radio"><button class="btn btn-primary" data-toggle="modal" href="#loginModal">Login</button><button class="btn btn-primary" data-toggle="modal" href="#signupModal">Signup</button></div></div>').prependTo('body');
-		 $('#loginname').remove(); 
-		 $("#loginform").removeClass("control-group error").addClass("textbox");
-		 var x =$('#uid');
-	var y=$('#pswd');
-	if ((x.val() || y.val()) != 0) {
-		x.val('');
-		y.val('');
-	}
-	});    
+		$('#loginModal').modal('hide');
+		$('#loginbar').append('<ul class="nav pull-right"> <li id="fat-menu" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sripathi Pai<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="#">My Profile</a></li><li><a href="#">My Bookings</a></li><li class="divider"></li><li><a href="#">Logout</a></li></ul></li></ul>')
+         $('#loginbtngrp').remove();    
+              });      
   
 				$.getJSON("restroname.js",function(data)
 				{
@@ -316,18 +250,18 @@ $('.datepicker').datepicker({
 					 //var mydata = data;
 								var i=0;
 								var j=1;
-								var div_data = "<h3><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";				
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";				
 								$(div_data).prependTo("#restroname");
-								var div_data = "<a href='#' >" + data["results"][i++]["result"].name + "</a>";
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
 								$(div_data).prependTo("#restroname" + (j++));
 								
-								var div_data = "<a href='#'>" + data["results"][i++]["result"].name + "</a>";
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
 								$(div_data).prependTo("#restroname" + (j++));
 								
-								var div_data = "<a href='#'>" + data["results"][i++]["result"].name + "</a>";
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
 								$(div_data).prependTo("#restroname" + (j++));
 								
-								var div_data = "<a href='#'>" + data["results"][i++]["result"].name + "</a>";
+								var div_data = "<h3 ><a href='#'>" + data["results"][i++]["result"].name + "</a></h3>";
 								$(div_data).prependTo("#restroname" + (j++));
 								
 	                            //$("#address").append('<strong>'+data["results"][0]["result"].address+'</strong>');
@@ -348,12 +282,12 @@ $('.datepicker').datepicker({
 	</script>
     
 	</head>
-		<body style="background-image:url('http://subtlepatterns.com/patterns/white_bed_sheet.png');background-repeat:repeat;">
+		<body>
 		
 		<!--Top Bar -->
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed">
       <div class="navbar-inner">
-        <div class="container" id="loginbar">
+        <div class="container-fluid" id="loginbar">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -385,7 +319,7 @@ $('.datepicker').datepicker({
 
 		
 		  <!-- End of TopBar -->
-		  <div class="pull-right" style="padding-top:65px; float:right; clear:both;" id="loginbtngrp">
+		  <div class="offset10" id="loginbtngrp">
 		  	
 		  <div class="btn-group"  data-toggle="buttons-radio">
   <button class="btn btn-primary" data-toggle="modal" href="#loginModal" >Login</button>
@@ -404,14 +338,14 @@ $('.datepicker').datepicker({
               			<input type="text" placeholder="Email" style="margin-left:-100px;" class="tooltip-test" data-original-title="Please Enter your Email" >
 			  			<input type="password" placeholder="Password" style="margin-left:-50px; margin-top:5px;" class="tooltip-test" data-original-title="Please Enter your Password" >
 				</form-->
-				<fieldset id="loginform" class="textbox">
-            	<label class="username" >
+				<fieldset class="textbox">
+            	<label class="username">
                 <span>Username or email</span>
-                <input class="tooltip-test" value="" type="text" data-original-title="Please Enter your Email" placeholder="Username" id="uid">
+                <input class="tooltip-test" value="" type="text" data-original-title="Please Enter your Email" placeholder="Username">
                 </label>
-                <label class="password" >
+                <label class="password">
                 <span>Password</span>
-                <input class="tooltip-test" value="" type="password" data-original-title="Please Enter your Password" placeholder="Password" id="pswd">
+                <input class="tooltip-test" value="" type="password" data-original-title="Please Enter your Password" placeholder="Password">
                 </label>
                 <button class="btn btn-primary" id="login">Sign in</button>
                 <p>
@@ -492,22 +426,23 @@ $('.datepicker').datepicker({
             </div>
           </div><!--End of the signup module-->
 		  <!--Search section -->
-		   
-	  
-	  
+		   <div class="page-header" style="padding-top:2%">
+	  <form class="form-search ">
+        <input type="text" class="input-medium search-query"  placeholder="Search by restaurants, cuisine ,Area " data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
+		<button class="btn  btn-primary" >Search</button>
+		
+		</form>
+		</div>	
 		
 		   <!--Beginning of the main body container-->
-		 <div class="container" style="padding-top:130px;">
+		 <div class="container">
 		 	 
-		 	<form class=" form-search "  style="margin-left:-4px;">
-        <input type="text" class="input-xxlarge search-query"  placeholder="Search by restaurants, cuisine ,Area " data-provide="typeahead" data-items="4" data-source="[&quot;Alabama&quot;,&quot;Alaska&quot;,&quot;Arizona&quot;,&quot;Arkansas&quot;,&quot;California&quot;,&quot;Colorado&quot;,&quot;Connecticut&quot;,&quot;Delaware&quot;,&quot;Florida&quot;,&quot;Georgia&quot;,&quot;Hawaii&quot;,&quot;Idaho&quot;,&quot;Illinois&quot;,&quot;Indiana&quot;,&quot;Iowa&quot;,&quot;Kansas&quot;,&quot;Kentucky&quot;,&quot;Louisiana&quot;,&quot;Maine&quot;,&quot;Maryland&quot;,&quot;Massachusetts&quot;,&quot;Michigan&quot;,&quot;Minnesota&quot;,&quot;Mississippi&quot;,&quot;Missouri&quot;,&quot;Montana&quot;,&quot;Nebraska&quot;,&quot;Nevada&quot;,&quot;New Hampshire&quot;,&quot;New Jersey&quot;,&quot;New Mexico&quot;,&quot;New York&quot;,&quot;North Dakota&quot;,&quot;North Carolina&quot;,&quot;Ohio&quot;,&quot;Oklahoma&quot;,&quot;Oregon&quot;,&quot;Pennsylvania&quot;,&quot;Rhode Island&quot;,&quot;South Carolina&quot;,&quot;South Dakota&quot;,&quot;Tennessee&quot;,&quot;Texas&quot;,&quot;Utah&quot;,&quot;Vermont&quot;,&quot;Virginia&quot;,&quot;Washington&quot;,&quot;West Virginia&quot;,&quot;Wisconsin&quot;,&quot;Wyoming&quot;]">
-		<button class=" btn  btn-primary" >Search</button>
-		</form>
-  
+		 	
+  <div class="row-fluid">
   	
    
 	<!--End of the sidebar content-->
-    <div class="span8" style="margin-left:auto;margin-right:auto;">
+    <div class="span7" style="padding-left:15%;">
 	<h4>Showing 1-20 restaurants</h4>
       <!--Body content, this is where we will be displaying the search content-->
 	  	  <div class="accordion" id="accordion2">
@@ -515,21 +450,31 @@ $('.datepicker').datepicker({
           <div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                  <img class="thumbnail" src="img/pl.gif" alt="">
-				  <div id="restroname1" class="restrohdg">
-				</div>
+                  <img src="img/pl.gif" alt="">
                 </a>
 				
               </div>
-		    	 	
+			    
+			    	 
+			    	 	 
+			    	 	
 			    	
+				<div class="row-fluid"><!-- Nme and button row start -->
+					
+					
+					<div class="restrohdg">
+					<div id="restroname1"class="span8 offset2" >
+				<!--h1 ><a href ="#">Restaurant2</a></h1-->
+				</div>
 				
+                </div>
+				</div>
 				<div class="row-fluid">
 				<div class="tblbtn">
-				
+				<div class="span8 offset5" >
 				
 				<button class="btn btn-large btn-primary" id="btn1">BookMyTable</button>
-				
+				</div>
 				</div>
 				
 				</div><!-- End of the name and buttonrow -->
@@ -649,18 +594,25 @@ $('.datepicker').datepicker({
           <div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                  <img class="thumbnail" src="img/pl.gif" alt="">
-				  <div id="restroname2" class="restrohdg">
-				</div>
+                  <img src="img/pl.gif" alt="">
                 </a>
               </div>
-			
+			 <div class="row-fluid"><!-- Nme and button row start -->
+					
+					
+					<div class="restrohdg">
+					<div id="restroname2"class="span8 offset2" >
+				<!--h1 ><a href ="#">Restaurant2</a></h1-->
+				</div>
+				
+                </div>
+				</div>
 				<div class="row-fluid">
 				<div class="tblbtn">
+				<div class="span8 offset5" >
 				
-				
-				<button class="btn btn-large btn-primary" id="btn2">BookMyTable</button>
-				
+				<button class="btn btn-large btn-primary">BookMyTable</button>
+				</div>
 				</div>
 				
 				</div><!-- End of the name and buttonrow -->
@@ -778,19 +730,25 @@ $('.datepicker').datepicker({
 			<div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-                  <img class="thumbnail" src="img/pl.gif" alt="">
-				  <div id="restroname3" class="restrohdg">
-				  	
-				  </div>
+                  <img src="img/pl.gif" alt="">
                 </a>
               </div>
-			
+			<div class="row-fluid"><!-- Nme and button row start -->
+					
+					
+					<div class="restrohdg">
+					<div id="restroname3"class="span8 offset2" >
+				<!--h1 ><a href ="#">Restaurant2</a></h1-->
+				</div>
+				
+                </div>
+				</div>
 				<div class="row-fluid">
 				<div class="tblbtn">
+				<div class="span8 offset5" >
 				
-				
-				<button class="btn btn-large btn-primary" id="btn3">BookMyTable</button>
-				
+				<button class="btn btn-large btn-primary">BookMyTable</button>
+				</div>
 				</div>
 				
 				</div><!-- End of the name and buttonrow -->
@@ -908,23 +866,25 @@ $('.datepicker').datepicker({
 			<div class="accordion-group">
               <div class="accordion-heading">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
-                  <img class="thumbnail" src="img/pl.gif" alt="">
-				  <div id="restroname4" class="restrohdg">
-				  	
-				  </div>
+                  <img src="img/pl.gif" alt="">
                 </a>
               </div>
 			 <div class="row-fluid"><!-- Nme and button row start -->
 					
 					
-					
+					<div class="restrohdg">
+					<div id="restroname4"class="span8 offset2" >
+				<!--h1 ><a href ="#">Restaurant2</a></h1-->
+				</div>
+				
+                </div>
 				</div>
 				<div class="row-fluid">
 				<div class="tblbtn">
+				<div class="span8 offset5" >
 				
-				
-				<button class="btn btn-large btn-primary" id="btn4">BookMyTable</button>
-				
+				<button class="btn btn-large btn-primary">BookMyTable</button>
+				</div>
 				</div>
 				
 				</div><!-- End of the name and buttonrow -->
@@ -1043,134 +1003,18 @@ $('.datepicker').datepicker({
           </div><!-- End of the accordion -->
 		  
     </div><!-- End of the span content-->
-	<!-- start of the right side content -->
-	<div class="span4 offset8" style="padding-top:-445px; position:absolute;">
-	<div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">
-            	   <!--div class="navbar-inner" style="opacity:0.95">
-        <div class="carousel-container" >
-          <p style="color:white; text-align:center;margin-top:10px;">Featured Restaurants
-          	</p>
-         
-          
-           
-          
-        </div>
-      </div-->
-              <div class="item">
-             
-            <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                  <img class="thumbnail" src="img/pl.gif">
-				  <a href="#" style="margin-left:135px;margin-top:-111px;position:absolute;">Restaurant1</a>
-                
-				</a>
-              </div>
-			  <div style="float:right;position:relative;margin-top:-90px;">
-			  <button class="btn btn-large btn-primary">Book My Table</button>
-			  </div>
-              <div id="collapseOne" class="accordion-body">
-                <div class="accordion-inner">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div>
-           		<div class="carousel-caption">
-           			<p>Featured Restaurants</p>
-           		</div>
-         
-          
-              </div>
-              <div class="item active">
-                 <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                  <img class="thumbnail" src="img/pl.gif">
-				  <a href="#" style="margin-left:135px;margin-top:-111px;position:absolute;">Restaurant2</a>
-
-                </a>
-              </div>
-			   <div style="float:right;position:relative;margin-top:-90px;">
-			  <button class="btn btn-large btn-primary">Book My Table</button>
-			  </div>
-              <div id="collapseTwo" class="accordion-body">
-                <div class="accordion-inner">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div>
-			<div class="carousel-caption">
-           			<p>Featured Restaurants</p>
-           		</div>
-              </div>
-              <div class="item">
-                  <div class="accordion-group">
-              <div class="accordion-heading">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-                  <img class="thumbnail" src="img/pl.gif">
-				  <a href="#" style="margin-left:135px;margin-top:-111px;position:absolute;">Restaurant3</a>
-                </a>
-              </div>
-			   <div style="float:right;position:relative;margin-top:-90px;">
-			  <button class="btn btn-large btn-primary">Book My Table</button>
-			  </div>
-              <div id="collapseThree" class="accordion-body">
-                <div class="accordion-inner">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-              </div>
-            </div>
-			<div class="carousel-caption">
-           			<p>Featured Restaurants</p>
-           		</div>
-            </div>
-			</div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-          </div>
-	<div class="well" style="overflow:hidden">
-                    <!-- BuySellAds Zone Code -->
-                    <div id="bsap_1274313" class="bsap_1274313 bsap"><a href="http://stats.buysellads.com/click.go?z=1274313&amp;b=2282751&amp;g=&amp;s=&amp;sw=1280&amp;sh=800&amp;br=chrome,20,win&amp;r=0.12122667138464749&amp;link=http://www.ipassexam.com/?utm_source=builtwithbootstrap&amp;utm_medium=banner&amp;utm_term=bootstrap&amp;utm_campaign=bootstrap" onmouseover="window.status = 'http://www.ipassexam.com/?utm_source=builtwithbootstrap&amp;utm_medium=banner&amp;utm_term=bootstrap&amp;utm_campaign=bootstrap'; return true;" onmouseout="window.status=''; return true;" class="ad1 odd" title="iPassExam" id="bsa_2282751" target="_blank"><img src="http://s3.buysellads.com/1274313/106232-1336656677.png" width="200" height="200" alt="iPassExam"></a></div>
-                    <!-- End BuySellAds Zone Code -->
-                </div>
-
-                <div class="well">
-                    <!-- BuySellAds Zone Code -->
-                    <div id="bsap_1274454" class="bsap_1274454 bsap"><a href="http://stats.buysellads.com/click.go?z=1274454&amp;b=2298165&amp;g=&amp;s=&amp;sw=1280&amp;sh=800&amp;br=chrome,20,win&amp;r=0.6189986481331289&amp;link=http://bootstraptoday.com" onmouseover="window.status = 'http://bootstraptoday.com'; return true;" onmouseout="window.status=''; return true;" class="ad1 odd" title="Intelligent Workspace for Smart Team" id="bsa_2298165" target="_blank"><img src="http://s3.buysellads.com/1274454/106869-1337075991.png" width="200" height="200" alt="Intelligent Workspace for Smart Team"></a><div class="bsap_adhere"><a href="http://buysellads.com/buy/detail/134477/zone/1274454?utm_source=site_134477&amp;utm_medium=website&amp;utm_campaign=cpmadhere&amp;utm_content=zone_1274454">advertise here</a></div></div>
-                    <!-- End BuySellAds Zone Code -->
-                </div>
-                
-                <!--div class="well">
-                    <h3>Get the BWB Newsletter!</h3>
-                    <form action="http://my.mailstorm.co.uk/t/r/s/gtkthd/" method="post" id="subForm">
-                        <label for="gtkthd-gtkthd">Enter your email address to stay up to date</label><br>
-                        <input type="text" name="cm-gtkthd-gtkthd" id="gtkthd-gtkthd" placeholder="jim@example.com"><br>
-                        <input type="submit" value="Subscribe" class="btn btn-info">
-                    </form>
-                </div-->
-
-                <div class="well" id="build" style="text-align: left;">
-                    <h3 style="text-align: center;">Build with Bootstrap</h3>
-                    <p>Some tools and links to help you with starting your next project using Bootstrap</p>
-
-                    <ul style="list-style: none outside none; margin: 9px 0pt;">
-                        <li>
-                            <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap Documentation</a><br>
-                            A great example of all the features of Bootstrap
-                        </li>
-                        <li>
-                            <a href="https://github.com/twitter/bootstrap/">GitHub Repository</a><br>
-                            Keep up with the latest updates and issues
-                        </li>
-                        <li>
-                            <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a><br>
-                            The iconic font for use with Twitter Bootstrap
-                        </li>
-                    </ul>
-                </div>
-	</div>
-
+	
+  </div><!--End of the row fluid-->
+  <div class="pagination offset4">
+        <ul>
+          <li class="disabled"><a href="«">«</a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="»">»</a></li>
+        </ul>
+      </div>
 </div><!--End of the conatiner fluid-->
 
 	</body>	
